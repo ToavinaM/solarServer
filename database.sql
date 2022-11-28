@@ -60,9 +60,17 @@ INSERT INTO
     public."Tickets"(
         "idMother",
         code,
+        title,
         status,
         "createdAt",
         "idUsers"
     )
 VALUES
-    (null, 'ticket21hsd', false, now(), 1);
+    (
+        null,
+        'ticket21hsd',
+        'tilteOfMytickets',
+        false,
+        now(),
+        1
+    );
