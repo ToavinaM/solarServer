@@ -1,76 +1,46 @@
-CREATE TABLE public."Tickets" (
-    id integer,
-    "idMother" integer,
-    code character varying NOT NULL,
-    status boolean NOT NULL,
-    "createdAt" time without time zone,
-    "idUsers" integer NOT NULL,
-    PRIMARY KEY (id)
-) WITH (OIDS = FALSE);
+\ c postgres;
 
-ALTER TABLE
-    public."Tickets" OWNER to postgres;
+drop database solar;
 
-CREATE TABLE public.roles (
-    id integer NOT NULL DEFAULT nextval('roles_id_seq' :: regclass),
-    name character varying COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT roles_pkey PRIMARY KEY (id)
-) WITH (OIDS = FALSE) TABLESPACE pg_default;
+create database solar;
 
-ALTER TABLE
-    public.roles OWNER to postgres;
+\ c solar;
 
-CREATE TABLE public.users (
-    id integer NOT NULL DEFAULT nextval('users_id_seq' :: regclass),
-    name character varying COLLATE pg_catalog."default" NOT NULL,
-    "idRoles" integer NOT NULL,
-    CONSTRAINT users_pkey PRIMARY KEY (id),
-    CONSTRAINT "idRoles" FOREIGN KEY ("idRoles") REFERENCES public.roles (id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION
-) WITH (OIDS = FALSE) TABLESPACE pg_default;
+drop table roles cascade;
 
-ALTER TABLE
-    public.users OWNER to postgres;
+CREATE TABLE roles (
+    "id" SERIAL,
+    "name" VARCHAR(50) NOT NULL,
+    PRIMARY KEY ("id")
+);
 
--- ////////////////////////insert
--- users
-INSERT INTO
-    public.users(id, name, "idRoles")
-VALUES
-    (?, ?, ?);
+drop table users cascade;
 
--- roles/
-INSERT INTO
-    public.roles(id, name)
-VALUES
-    (?, ?);
+CREATE TABLE users (
+    "id" SERIAL,
+    "name" VARCHAR(50),
+    "idRoles" INTEGER NOT NULL,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("idRoles") REFERENCES roles ("id")
+);
 
--- //user
-INSERT INTO
-    public.users(name, "idRoles")
-VALUES
-    ('JeanAdmin', 1);
+drop table tickets cascade;
 
-INSERT INTO
-    public.users(name, "idRoles")
-VALUES
-    ('MarieUser', 2);
+CREATE TABLE tickets (
+    "id" SERIAL,
+    "idMother" INTEGER NULL,
+    "code" VARCHAR(20) NOT NULL,
+    "status" BOOLEAN NOT NULL DEFAULT false,
+    "createdAt" DATE NOT NULL DEFAULT NOW(),
+    "idUsers" INTEGER NOT NULL,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("idUsers") REFERENCES users("id")
+);
 
--- //tickets
-INSERT INTO
-    public."Tickets"(
-        "idMother",
-        code,
-        title,
-        status,
-        "createdAt",
-        "idUsers"
-    )
-VALUES
-    (
-        null,
-        'ticket21hsd',
-        'tilteOfMytickets',
-        false,
-        now(),
-        1
-    );
+CREATE TABLE files(
+    "id" SERIAL,
+    "filesPath" VARCHAR(100),
+    "idTickets" INTEGER,
+    PRIMARY KEY ("id"),
+    FOREIGN KEY ("idTickets") REFERENCES tickets("id")
+);
