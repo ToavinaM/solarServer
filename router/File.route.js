@@ -2,7 +2,7 @@ const route = require('express').Router();
 const Mapping = require('../models/Mapping');
 var multer = require('multer');
 const path = require('path');
-////////////////////i'll add file this night
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         // Uploads is the Upload_folder_name
@@ -38,7 +38,19 @@ var upload = multer({
 
 route.post('/upload', upload, (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
+    if (!req.file) {
+        console.log("No file upload");
+    } else {
+        console.log(req.file.filename)
 
+        ////baseUrl
+        // var imgsrc = 'http://127.0.0.1:3000/images/' + req.file.filename
+        // var insertData = "INSERT INTO users_file(file_src)VALUES(?)"
+        // db.query(insertData, [imgsrc], (err, result) => {
+        //     if (err) throw err
+        //     console.log("file uploaded")
+        // })
+    }
     // Mapping.execute(sql).then(rep => {
     //     return res.send(rep);
     // }).catch(error => {

@@ -17,7 +17,7 @@ app.use(express.static("public"));
 let ticket = require('./router/Ticket.route');
 let file = require('./router/File.route');
 
-app.use('/ticket', ticket);
+// app.use('/ticket', ticket);
 app.use('/file', file);
 
 http.listen(PORT, () => {
