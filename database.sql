@@ -37,6 +37,8 @@ CREATE TABLE tickets (
     FOREIGN KEY ("idUsers") REFERENCES users("id")
 );
 
+drop table files cascade;
+
 CREATE TABLE files(
     "id" SERIAL,
     "filesPath" VARCHAR(100),

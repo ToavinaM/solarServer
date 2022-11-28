@@ -11,4 +11,4 @@ const pool = new Pool({
     ssl: isProduction
 })
 
-module.exports = pool.query;
+module.exports = pool.query.bind(pool);
