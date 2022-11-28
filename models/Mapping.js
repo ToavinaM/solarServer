@@ -1,18 +1,14 @@
-var mysql = require('mysql');
 const DbConnect = require('./DbConnect');
 
 const mapping = {
     execute: (myQuery) => {
         return new Promise((resolve, reject) => {
-            connection = mysql.createConnection(DbConnect);
-            connection.query(myQuery, function (error, results) {
-                if (error) {
-                    console.log('!!Error in Mapping:', error);
-                    reject(error);
-                }
-                resolve(results)
+            DbConnect.connect();
+            DbConnect.query(myQuery, (err, res) => {
+                if (err) reject(err);
+                resolve(res);
+                DbConnect.end();
             });
-            connection.end();
         })
     }
 }

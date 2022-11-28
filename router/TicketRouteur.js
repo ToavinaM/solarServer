@@ -4,9 +4,9 @@ const Mapping = require('../models/Mapping');
 route.get('/', (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
 
-    let sql = `SELECT * from Ticket`;
+    let sql = `SELECT * from "Tickets"`;
     Mapping.execute(sql).then(rep => {
-        return res.send({ ticket: rep });
+        return res.send(rep.rows);
     }).catch(error => {
         return res.send({ error });
     })
