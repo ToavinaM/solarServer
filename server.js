@@ -14,8 +14,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //routes
-var ticket = require('./router/TicketRouteur');
+let ticket = require('./router/Ticket.route');
+let file = require('./router/File.route');
+
 app.use('/ticket', ticket);
+app.use('/file', file);
 
 http.listen(PORT, () => {
   console.log(`Serveur à l écoute de ${PORT}`)

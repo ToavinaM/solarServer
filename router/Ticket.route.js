@@ -47,6 +47,21 @@ route.put('/update', (req, res) => {
     }).catch(error => {
         return res.send({ error });
     })
+});
+
+route.delete('/delete', (req, res) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    let code = req.body.code; ////////need to be params
+    let sql = `
+        DELETE FROM public."Tickets"
+        WHERE code = '${code}';
+    `;
+    console.log(sql);
+    Mapping.execute(sql).then(rep => {
+        return res.send(rep);
+    }).catch(error => {
+        return res.send({ error });
+    })
 })
 
 module.exports = route;
