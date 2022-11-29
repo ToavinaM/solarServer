@@ -36,7 +36,7 @@ CREATE TABLE tickets (
     "createdAt" DATE NOT NULL DEFAULT NOW(),
     "idUsers" INTEGER NOT NULL,
     PRIMARY KEY ("id"),
-    FOREIGN KEY ("idUsers") REFERENCES users("id")
+    FOREIGN KEY ("idUsers") REFERENCES users("id") ON DELETE CASCADE
 );
 
 drop table files cascade;
@@ -46,5 +46,5 @@ CREATE TABLE files(
     "filesPath" VARCHAR(100),
     "idTickets" INTEGER,
     PRIMARY KEY ("id"),
-    FOREIGN KEY ("idTickets") REFERENCES tickets("id")
+    FOREIGN KEY ("idTickets") REFERENCES tickets("id") ON DELETE CASCADE
 );
