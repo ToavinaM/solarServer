@@ -1,8 +1,25 @@
 const builder = require("../builder");
 
 class TicketRepository {
-
-
+    //cascade update
+    static async delete(dbConnect, code) {
+        try {
+            let sql = `delete  from tickets where code = ${code}`;
+            await dbConnect(sql);
+        }
+        catch (err) {
+            console.log('deleteError', err);
+        }
+    }
+    static async update(dbConnect, code) {
+        try {
+            let sql = "UPDATE users SET name = $1, idRoles= $2"
+            await dbConnect(sql);
+        }
+        catch (err) {
+            console.log('deleteError', err);
+        }
+    }
 
     //if I want to get reply of ticket, I put all ticket with mother  
     static async getAll(dbConnect) {
