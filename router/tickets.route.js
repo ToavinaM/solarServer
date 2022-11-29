@@ -18,7 +18,7 @@ router.post("", async function (req, res) {
         await TicketsRepository.save(query, req.body);
         res.send(await TicketsRepository.getByCode(query, req.body.code));
     } catch (error) {
-        res.status(500).send(error.message)
+        res.status(500).send(error.message);
     }
 })
 router.get("/:id", async function (req, res) {

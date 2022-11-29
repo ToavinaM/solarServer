@@ -12,10 +12,10 @@ class TicketRepository {
     }
     /// if idMother --> reply
     static async save(dbConnect, newTicket) {
-        let sql = `insert into tickets ("idMother","code","idUsers")values($1,$2,$3)`;
-        let row = await dbConnect(sql, [newTicket.mother?.id, newTicket.code, newTicket.user.id])
+        let sql = `insert into tickets ("idMother","code","idUsers","title", "description")values($1,$2,$3,$4,$5)`;
+        let row = await dbConnect(sql, [newTicket.mother?.id, newTicket.code, newTicket.user.id, newTicket.title, newTicket.description])
         // .then()
-        console.log(row.result);
+        console.log('here', row.result);
         return newTicket;
     }
 
