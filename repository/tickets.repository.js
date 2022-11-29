@@ -1,14 +1,16 @@
-const { Users, Roles } = require("./../models");
 const builder = require("../builder");
 
-class RolesRepository {
+class TicketRepository {
 
+
+
+    //if I want to get reply of ticket, I put all ticket with mother  
     static async getAll(dbConnect) {
         let sql = `select * from tickets_users_roles_files`;
         let res = await dbConnect(sql);
         return builder.tickets(res.rows);
     }
-
+    /// if idMother --> reply
     static async save(dbConnect, newTicket) {
         let sql = `insert into tickets ("idMother","code","idUsers")values($1,$2,$3)`;
         let row = await dbConnect(sql, [newTicket.mother?.id, newTicket.code, newTicket.user.id])
@@ -23,6 +25,7 @@ class RolesRepository {
         if (res.rows.length != 1) throw new Error(`cannot find user with code=${code}`)
         return builder.tickets(res.rows)[0];
     }
+
     // update(dbConnect) {
     //     let sql = "UPDATE users SET name = $1, idRoles= $2"
     //     return this;
@@ -30,4 +33,4 @@ class RolesRepository {
 }
 
 
-module.exports = RolesRepository;
+module.exports = TicketRepository;

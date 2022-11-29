@@ -28,6 +28,8 @@ drop table tickets cascade;
 
 CREATE TABLE tickets (
     "id" SERIAL,
+    "title" VARCHAR(20) NOT NULL,
+    "description" VARCHAR(120) NOT NULL,
     "idMother" INTEGER NULL,
     "code" VARCHAR(20) NOT NULL,
     "status" BOOLEAN NOT NULL DEFAULT false,

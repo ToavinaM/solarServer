@@ -16,6 +16,36 @@ values
     ('Lise', 2);
 
 insert into
-    tickets ("code", "idUsers")
+    tickets ("code", "idUsers", "title", "description")
 values
-    ('XS123h', 1);
+    (
+        'XS123h',
+        1,
+        'Refactoring',
+        'need to do the best'
+    );
+
+-- //with mother
+insert into
+    tickets (
+        "code",
+        "idUsers",
+        "idMother",
+        "title",
+        "description"
+    )
+values
+    (
+        'XS12asd3hasd',
+        2,
+        2,
+        'checkReply',
+        'this is a simple test'
+    ),
+    (
+        'XS12asd3hasd',
+        1,
+        2,
+        'checkReply2',
+        'this is a simple test2'
+    );

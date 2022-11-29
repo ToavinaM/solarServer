@@ -16,7 +16,9 @@ create view tickets_users_roles as (
         t."idMother",
         t."code",
         t."status",
-        t."createdAt"
+        t."createdAt",
+        t."title",
+        t."description"
     from
         tickets t
         join users_roles u on u."idUsers" = t."idUsers"

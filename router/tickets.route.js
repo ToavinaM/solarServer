@@ -11,7 +11,16 @@ router.get("", async function (req, res) {
         res.status(500).send(error.message)
     }
 })
-
+router.post("", async function (req, res) {
+    try {
+        console.log(req.body);
+        req.body.code = makeId(20);
+        await TicketsRepository.save(query, req.body);
+        res.send(await TicketsRepository.getByCode(query, req.body.code));
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+})
 router.get("/:id", async function (req, res) {
     try {
         let tickets = await TicketsRepository.getById(query, { ticketsId: req.params.id });
@@ -41,16 +50,7 @@ router.get("/reply/:id", async function (req, res) {
     }
 })
 
-router.post("", async function (req, res) {
-    try {
-        console.log(req.body);
-        req.body.code = makeId(20);
-        await TicketsRepository.save(query, req.body);
-        res.send(await TicketsRepository.getByCode(query, req.body.code));
-    } catch (error) {
-        res.status(500).send(error.message)
-    }
-})
+
 
 
 
