@@ -11,7 +11,9 @@ values
 insert into
     users ("name", "idRoles")
 values
-    ('Toavina', 1);
+    ('Toavina', 1),
+    ('John', 1),
+    ('Lise', 2);
 
 insert into
     tickets ("code", "idUsers")

@@ -10,19 +10,21 @@ class UsersRepository {
 
     }
 
+
+    //get instance of user and role
     static async getById(dbConnect, id) {
         let sql = `select * from users_roles where "idUsers" = ${id}`;
         let res = await dbConnect(sql);
         if (res.rows.length != 1) throw new Error(`cannot find user with id=${id}`)
         else {
-            let r = res.rows[0];
-            let u = new Users();
-            u.id = r.idUsers;
-            u.name = r.usersName;
-            u.roles = new Roles();
-            u.roles.id = r.idRoles;
-            u.roles.name = r.rolesName;
-            return u;
+            let result = res.rows[0];
+            let user = new Users();
+            user.id = result.idUsers;
+            user.name = result.usersName;
+            user.roles = new Roles();
+            user.roles.id = result.idRoles;
+            user.roles.name = result.rolesName;
+            return user;
         }
     }
     save(dbConnect) {
