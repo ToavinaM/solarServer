@@ -31,5 +31,5 @@ module.exports = multer({
             + "following filetypes - " + filetypes);
     }
     // fileSolar is the name of file attribute
-}).single("fileSolar");
+}).array("files");
 

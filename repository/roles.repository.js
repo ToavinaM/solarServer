@@ -6,9 +6,10 @@ class RolesRepository {
     ///get all role with userbyrole
     static async getAll(dbConnect, whereObject) {
         //order by is important for grouping roles instance to admin and user
-        let sql = `select * from users_roles order by "idRoles" where 1=1 `;
+        let sql = `select * from users_roles  where 1=1`;
+
         const { condition, value } = filter(whereObject);
-        let res = await dbConnect(sql + condition, value)
+        let res = await dbConnect(sql + condition + `order by "idRoles"`, value)
         return builder.roles(res.rows);
     }
 

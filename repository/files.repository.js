@@ -30,8 +30,8 @@ class FilesRepository {
         // }
     }
     static async save(dbConnect, files) {
-        let sql = `INSERT INTO files ("idTickets","filesPath") values ($1,$2) `
-        return dbConnect(sql, [files.id, files.path])
+        let sql = `INSERT INTO files ("idTickets","filesPath") values ($1,$2)`;
+        return await dbConnect(sql, [files.tickets.id, files.filesPath])
     }
 }
 

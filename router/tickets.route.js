@@ -1,8 +1,9 @@
 const { multerHandler } = require("../config");
 const query = require("../dbConnect");
+const { Files } = require("../models");
 const { TicketsRepository, FilesRepository } = require("../repository");
-const { makeId } = require('../utils');
-const { where } = require('../utils');
+
+const { where, makeId } = require('../utils');
 const router = require("express").Router();
 router.get("", async function (req, res) {
     try {
@@ -13,23 +14,26 @@ router.get("", async function (req, res) {
     }
 })
 
+
+
 router.post("", multerHandler, async function (req, res) {
     try {
-        // fileSolar
-
-        console.log(req.file);
         req.body.code = makeId(20);
+
+        // console.log('asd', req.body);
 
         await TicketsRepository.save(query, req.body);
         const newTicket = await TicketsRepository.getByCode(query, req.body.code)
+        // console.log('users', newTicket);
         for (let f of req.files || []) {
             let newFiles = new Files();
             newFiles.filesPath = f.path;
-            newFiles.ticket = newTicket;
+            newFiles.tickets = newTicket;
             await FilesRepository.save(query, newFiles);
         }
 
         res.send(await TicketsRepository.getByCode(query, req.body.code));
+        // res.sendStatus(200);
     } catch (error) {
         res.status(500).send(error.message);
     }

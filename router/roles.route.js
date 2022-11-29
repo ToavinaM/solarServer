@@ -7,7 +7,7 @@ const route = require("express").Router();
 route.get("", async function (req, res) {
     try {
         const whereObject = where(req.query.where);
-        res.send(await RolesRepository.getAll(DbConnect))
+        res.send(await RolesRepository.getAll(DbConnect, whereObject));
     } catch (error) {
         res.status(500).send(error.message)
     }

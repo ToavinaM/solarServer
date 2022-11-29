@@ -29,21 +29,19 @@ class TicketRepository {
     }
 
     static async getByCode(dbConnect, code) {
-        let res = getAll(dbConnect, { code: code });
+        let res = await TicketRepository.getAll(dbConnect, { code: code });
+        // console.log('asdasd', res);
         if (res.length != 1)
             throw new Error(`cannot find Ticket with code =${code}`)
         return res[0]
     }
     static async getById(dbConnect, id) {
-        let res = getAll(dbConnect, { idTickets: id });
+        let res = await TicketRepository.getAll(dbConnect, { idTickets: id });
         if (res.length != 1)
             throw new Error(`cannot find Ticket with id =${id}`)
         return res[0]
     }
-    // update(dbConnect) {
-    //     let sql = "UPDATE users SET name = $1, idRoles= $2"
-    //     return this;
-    // }
+
 }
 
 

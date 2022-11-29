@@ -1,4 +1,4 @@
-function makeid(length) {
+function makeId(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     var charactersLength = characters.length;
@@ -26,4 +26,4 @@ function where(whereString) {
     return JSON.parse(whereString)
 }
 
-module.exports = { filter, makeid, where }
+module.exports = { filter, makeId, where }

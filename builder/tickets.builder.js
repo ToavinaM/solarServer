@@ -27,12 +27,13 @@ function buildTicket(rows) {
         ticket.users.roles.name = row.rolesName;
 
         if (row.idFiles) {
+            console.log(row);
             let files = new Files();
-            files.id = row.idFields;
+            files.id = row.idFiles;
             files.filesPath = row.filesPath;
             ticket.files.push(files);
         }
-        console.log(ticket);
+        //console.log(ticket);
         if (!rep.includes(ticket))
             rep.push(ticket)
     }
