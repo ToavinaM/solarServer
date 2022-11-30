@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, 'build')));
 //   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 // });
 app.get('/', function (req, res) {
-  res.send("sadasdasd");
+  res.send("sadasdagsd");
 });
 
 app.listen(PORT, () => {
