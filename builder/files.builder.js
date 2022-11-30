@@ -5,6 +5,11 @@ function buildFiles(row) {
             let files = new Files();
             files.id = r.idFiles;
             files.filesPath = r.filesPath;
+            files.name = row.name;
+            files.extension = row.extension;
+            files.mimetype = row.mimetype;
+
+
 
             files.tickets = new Tickets();
             files.tickets.id = r.idTickets;

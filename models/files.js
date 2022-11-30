@@ -1,21 +1,11 @@
 class Files {
     id;
-    filePath;
+    filesPath;
+    name; //tickets is instance of ticket
+    extension; //tickets is instance of ticket
     tickets; //tickets is instance of ticket
+    mimetype;
 
-    static getAll(dbConnect) {
-        let sql = `select * from "files"`;
-        let rep = [];
-        return rep;
-    }
-    static getById(dbConnect, id) {
-        let sql = `select * from "files" where id = ${id}`;
-        let rep;
-        return rep;
-    }
-    save(dbConnect) {
-        let sql = `insert into "files" ("filePath","idTickets")values($1,$2)`;
-        return this;
-    }
+
 }
 module.exports = Files

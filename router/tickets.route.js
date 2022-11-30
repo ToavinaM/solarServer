@@ -26,7 +26,12 @@ router.post("", multerHandler, async function (req, res) {
         const newTicket = await TicketsRepository.getByCode(query, req.body.code)
         // console.log('users', newTicket);
         for (let f of req.files || []) {
+            console.log(f);
             let newFiles = new Files();
+            newFiles.extension = f.filename.substring(f.filename.lastIndexOf('.'));
+            newFiles.name = f.originalname;
+            newFiles.mimetype = f.mimetype;
+
             newFiles.filesPath = f.path;
             newFiles.tickets = newTicket;
             await FilesRepository.save(query, newFiles);

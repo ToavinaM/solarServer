@@ -30,6 +30,9 @@ function buildTicket(rows) {
             let files = new Files();
             files.id = row.idFiles;
             files.filesPath = row.filesPath;
+            files.name = row.name;
+            files.extension = row.extension;
+            files.mimetype = row.mimetype;
             ticket.files.push(files);
         }
         //console.log(ticket);

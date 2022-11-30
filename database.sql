@@ -43,8 +43,11 @@ drop table files cascade;
 
 CREATE TABLE files(
     "id" SERIAL,
-    "filesPath" VARCHAR(100),
     "idTickets" INTEGER,
+    "name" VARCHAR(100),
+    "mimetype" VARCHAR(30),
+    "extension" VARCHAR(10),
+    "filesPath" VARCHAR(100),
     PRIMARY KEY ("id"),
     FOREIGN KEY ("idTickets") REFERENCES tickets("id") ON DELETE CASCADE
 );

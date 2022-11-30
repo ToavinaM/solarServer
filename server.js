@@ -8,7 +8,7 @@ const path = require("path");
 
 app.use('/uploads', express.static(path.join(__dirname, "uploads")));
 app.use(express.raw());
-var http = require('http').createServer(app);
+// var http = require('http').createServer(app);
 //
 app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -19,8 +19,8 @@ app.use("/user", UsersRouter);
 app.use("/ticket", TicketsRouter);
 app.use("/role", RolesRouter);
 app.use("/file", FilesRouter);
+app.get("/qwert", (a, b) => b.send("sdsdsd"))
 
-
-http.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Serveur à l écoute de ${PORT}`)
 });

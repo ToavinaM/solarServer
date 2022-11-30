@@ -28,6 +28,9 @@ create view tickets_users_roles_files as (
     select
         t.*,
         f."filesPath",
+        f."name",
+        f."extension",
+        f."mimetype",
         f."id" as "idFiles"
     from
         tickets_users_roles t
