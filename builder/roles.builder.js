@@ -1,6 +1,5 @@
 const { Users, Roles } = require("../models");
 
-
 function buildRoles(rows) {
     let rep = [];
     let id = 0;

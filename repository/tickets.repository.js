@@ -7,9 +7,11 @@ class TicketRepository {
         let sql = `delete  from tickets where "code" = $1`;
         return dbConnect(sql, [code]);
     }
-    static update(dbConnect, tickets) {
-        let sql = `UPDATE tickets SET "description" = $1, "status"= $2 ,"title"=$3 where id=$4`
-        return dbConnect(sql, [tickets.description, tickets.status, tickets.title, tickets.id]);
+    static async update(dbConnect, code, tickets) {
+        let sql = `UPDATE tickets SET "description" = $1, "status"= $2 ,"title"=$3 where code=$4`
+        await dbConnect(sql, [tickets.description, tickets.status, tickets.title, code]);
+        let res = await TicketRepository.getAll(dbConnect, { code: code });
+        return res;
     }
 
     //if I want to get reply of ticket, I put all ticket with mother  
@@ -22,6 +24,7 @@ class TicketRepository {
     }
     /// if idMother --> reply
     static async save(dbConnect, newTicket) {
+        console.log('debuddddddd', newTicket);
         let sql = `insert into tickets ("idMother","code","idUsers","title", "description")values($1,$2,$3,$4,$5)`;
         let row = await dbConnect(sql, [newTicket.mother?.id, newTicket.code, newTicket.users.id, newTicket.title, newTicket.description])
         // .then()

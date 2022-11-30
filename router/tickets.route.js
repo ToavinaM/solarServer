@@ -20,8 +20,8 @@ router.post("", multerHandler, async function (req, res) {
     try {
         req.body.code = makeId(20);
 
-        // console.log('asd', req.body);
-
+        console.log('WWWWWWWWinasd', req.body);
+        if (req.body.mother.id === '') req.body.mother.id = null;
         await TicketsRepository.save(query, req.body);
         const newTicket = await TicketsRepository.getByCode(query, req.body.code)
         // console.log('users', newTicket);
@@ -34,6 +34,16 @@ router.post("", multerHandler, async function (req, res) {
 
         res.send(await TicketsRepository.getByCode(query, req.body.code));
         // res.sendStatus(200);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+})
+
+
+router.put("/:code", async function (req, res) {
+    try {
+        let updateTickets = { title: req.body.title, description: req.body.description, status: req.body.status }
+        res.send(await TicketsRepository.update(query, req.params.code, updateTickets));
     } catch (error) {
         res.status(500).send(error.message);
     }

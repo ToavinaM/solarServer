@@ -13,28 +13,29 @@ route.get("", async function (req, res) {
     }
 });
 
-route.get("", async function (req, res) {
+// route.get("", async function (req, res) {
+//     try {
+//         const whereObject = where(req.query.where);
+//         res.send(await FilesRepository.getAll(DbConnect, whereObject))
+//     } catch (error) {
+//         res.status(500).send(error.message)
+//     }
+// });
+
+route.get("/:idTickets", async function (req, res) {
     try {
-        const whereObject = where(req.query.where);
-        res.send(await FilesRepository.getAll(DbConnect, whereObject))
+        res.send(await FilesRepository.getByTicket(DbConnect, req.params.idTickets));
     } catch (error) {
         res.status(500).send(error.message)
     }
 });
 
-route.get("/:idTickets", async function (req, res) {
-    try {
-        res.send(await FilesRepository.getByTicket(DbConnect, +req.params.idTickets));
-    } catch (error) {
-        res.status(500).send(error.message)
-    }
-});
-route.delete("/:id", async function (req, res) {
-    try {
-        res.send(await FilesRepository.deleteOrRestore(DbConnect, +req.params.id));
-    } catch (error) {
-        res.status(500).send(error.message)
-    }
-});
+// route.delete("/:id", async function (req, res) {
+//     try {
+//         res.send(await FilesRepository.deleteOrRestore(DbConnect, +req.params.id));
+//     } catch (error) {
+//         res.status(500).send(error.message)
+//     }
+// });
 
 module.exports = route 

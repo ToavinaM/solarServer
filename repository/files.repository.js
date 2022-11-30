@@ -4,14 +4,21 @@ const { filter } = require('../utils');
 class FilesRepository {
 
     static async getAll(dbConnect, whereObject) {
-        let sql = `select * from tickets_users_roles_files where 1=1 `;
+        let sql = `select * from files where 1=1 `;
         const { condition, value } = filter(whereObject);
-        let res = await dbConnect(sql + condition, value)
+        let res = await dbConnect(sql + condition, value);
         return builder.files(res.rows);
+        // return res;
     }
-    static getByTicket(dbConnect, idTickets) {
-        return this.getAll(dbConnect, { idTickets: idTickets })
+
+    static async getByTicket(dbConnect, id) {
+        let res = await this.getAll(dbConnect, { idTickets: id })
+
+        if (res.length != 1)
+            throw new Error(`cannot find Ticket with idTickets =${id}`)
+        return res[0]
     }
+
     static async update(dbConnect, files) {
         let sql = `UPDATE files set "deleted"=$1 where "idFiles"=$2`
         return await dbConnect(sql, [files.deleted, files.id])
