@@ -8,6 +8,6 @@ const connectionString = `postgresql://${process.env.DB_USER}:${process.env.DB_P
 
 const pool = new Pool({
     connectionString: connectionString,
-    // ssl: isProduction
+    ssl: true
 })
 module.exports = pool.query.bind(pool);
