@@ -21,6 +21,13 @@ app.use("/role", RolesRouter);
 app.use("/file", FilesRouter);
 app.get("/qwert", (a, b) => b.send("sdsdsd"))
 
+
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
+
+
 app.listen(PORT, () => {
   console.log(`Serveur à l écoute de ${PORT}`)
 });
