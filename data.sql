@@ -38,14 +38,14 @@ values
     (
         'XS12asd3hasd',
         2,
-        2,
+        1,
         'checkReply',
         'this is a simple test'
     ),
     (
         'XS12asd3hasd',
         1,
-        2,
+        1,
         'checkReply2',
         'this is a simple test2'
     );

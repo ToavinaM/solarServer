@@ -66,6 +66,7 @@ router.get("/code/:code", async function (req, res) {
 })
 router.get("/reply/:id", async function (req, res) {
     try {
+        console.log(req.params.id);
         let tickets = await TicketsRepository.getAll(query, { idMother: req.params.id });
         res.send(tickets)
     } catch (error) {

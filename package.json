@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "watch": "nodemon server.js",
+    "watch": "cls && nodemon server.js",
     "client": "cd ../client && npm start",
     "build": "cd ../client && npm run build"
   },

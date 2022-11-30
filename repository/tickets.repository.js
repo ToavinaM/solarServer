@@ -16,7 +16,8 @@ class TicketRepository {
     static async getAll(dbConnect, whereObject) {
         let sql = `select * from tickets_users_roles_files where 1=1 `;
         const { condition, value } = filter(whereObject);
-        let res = await dbConnect(sql + condition, value)
+        // console.log(sql + condition);
+        let res = await dbConnect(sql + condition + 'order by "idTickets","idFiles"', value)
         return builder.tickets(res.rows);
     }
     /// if idMother --> reply

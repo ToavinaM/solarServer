@@ -4,9 +4,9 @@ function buildTicket(rows) {
     let id = 0;
     let ticket;
     let rep = [];
-
     for (let row of rows || []) {
         if (row.idTickets !== id) {
+            id = row.idTickets
             ticket = new Tickets();
             ticket.users = new Users();
             ticket.users.roles = new Roles();
@@ -27,7 +27,6 @@ function buildTicket(rows) {
         ticket.users.roles.name = row.rolesName;
 
         if (row.idFiles) {
-            console.log(row);
             let files = new Files();
             files.id = row.idFiles;
             files.filesPath = row.filesPath;

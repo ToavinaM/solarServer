@@ -13,10 +13,17 @@ function filter(where) {
     let value = [];
     let condition = "";
     for (let k = 0; k < keys.length; k++) {
-        condition += ` and "${keys[k]}"=$${k + 1}`;
+        condition += ` and "${keys[k]}"`;
+        if (where[keys[k]] == null) {
+            condition += " is null "
+        }
+        else
+            condition += "= $" + (k + 1)
+
     }
     for (let k of keys)
-        value.push(where[k])
+        if (where[k] != null)
+            value.push(where[k])
     return { condition, value }
 }
 function where(whereString) {
