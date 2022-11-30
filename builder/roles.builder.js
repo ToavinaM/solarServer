@@ -1,4 +1,3 @@
-const { roles } = require(".");
 const { Users, Roles } = require("../models");
 
 function buildRoles(rows) {
