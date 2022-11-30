@@ -5,6 +5,7 @@ const route = require("express").Router();
 
 ////find all users, req.query.where is optional
 route.get("", async function (req, res) {
+
     try {
         const whereObject = where(req.query.where);
         res.send(await UsersRepository.getAll(DbConnect, whereObject))

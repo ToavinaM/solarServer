@@ -9,7 +9,15 @@ class RolesRepository {
         let sql = `select * from users_roles  where 1=1`;
 
         const { condition, value } = filter(whereObject);
-        let res = await dbConnect(sql + condition + `order by "idRoles"`, value)
+        console.log(sql + condition + ` order by "idRoles"`);
+
+        dbConnect(sql + condition + ` order by "idRoles"`, value)
+            .then(console.log).catch(console.log);
+
+
+
+        let res = await dbConnect(sql + condition + ` order by "idRoles"`, value);
+
         return builder.roles(res.rows);
     }
 
