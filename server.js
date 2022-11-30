@@ -3,9 +3,9 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 require('dotenv').config();
-const PORT = process.env.PORT || 8090;
+const PORT = process.env.PORT || 1000;
 const path = require("path");
-
+console.log(PORT);
 app.use('/uploads', express.static(path.join(__dirname, "uploads")));
 app.use(express.raw());
 // var http = require('http').createServer(app);
