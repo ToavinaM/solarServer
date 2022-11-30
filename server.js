@@ -1,20 +1,34 @@
 const express = require('express');
 const app = express();
-var bodyParser = require('body-parser');
 const cors = require('cors');
 app.use(cors());
+
+const cors = require('cors');
+
+const corsOption = {
+  origin: [''],
+};
+app.use(cors(corsOption));
+
+
 require('dotenv').config();
 const PORT = process.env.PORT || 8090;
+const path = require("path");
+
+app.use('/uploads', express.static(path.join(__dirname, "uploads")));
+app.use(express.raw());
 var http = require('http').createServer(app);
 //
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-
+app.use(express.json());
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
 //routes
-var ticket = require('./router/TicketRouteur');
-app.use('/', ticket);
+const { UsersRouter, RolesRouter, TicketsRouter, FilesRouter } = require("./router")
+app.use("/user", UsersRouter);
+app.use("/ticket", TicketsRouter);
+app.use("/role", RolesRouter);
+app.use("/file", FilesRouter);
+
 
 http.listen(PORT, () => {
   console.log(`Serveur à l écoute de ${PORT}`)
