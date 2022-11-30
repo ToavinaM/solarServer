@@ -19,7 +19,10 @@ app.use("/user", UsersRouter);
 app.use("/ticket", TicketsRouter);
 app.use("/role", RolesRouter);
 app.use("/file", FilesRouter);
-
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 http.listen(PORT, () => {
   console.log(`Serveur à l écoute de ${PORT}`)
