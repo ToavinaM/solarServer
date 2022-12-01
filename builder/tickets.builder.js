@@ -16,6 +16,7 @@ function buildTicket(rows) {
                 ticket.mother.id = row.idMother;
             }
         }
+        ticket.createdAt = row.createdAt;
         ticket.id = row.idTickets;
         ticket.title = row.title;
         ticket.description = row.description;
